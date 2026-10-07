@@ -50,8 +50,25 @@ def predict(customer: Customer):
         "Total_interaction": customer.Total_interaction
     }])
 
+    # Predict cluster
     cluster = int(model.predict(data)[0])
 
+    # Transform the customer through everything
+    # before the final K-Means model
+    transformed_data = model[:-1].transform(data)
+
+    # Get distance from the customer to every K-Means centroid
+    distances = model[-1].transform(transformed_data)[0]
+    pca_x = float(transformed_data[0][0])
+    pca_y = float(transformed_data[0][1])
+    
     return {
-        "cluster": cluster
+        "cluster": cluster,
+        "distances": {
+            "0": float(distances[0]),
+            "1": float(distances[1]),
+            "2": float(distances[2])
+        },
+        "pca_x": pca_x,  
+        "pca_y": pca_y   
     }
