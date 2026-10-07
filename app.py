@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 import seaborn as sns
 
-API_URL = "[https://customer-segmentation-api-pf7n.onrender.com](https://customer-segmentation-api-pf7n.onrender.com)"
+API_URL = "https://customer-segmentation-api-pf7n.onrender.com"
 
 # -------------------------
 # Cluster Profiles
