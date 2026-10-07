@@ -160,7 +160,8 @@ if st.button("Predict Customer Segment"):
 
         response = requests.post(
             f"{API_URL}/predict",
-            json=payload
+            json=payload,
+            timeout=30
         )
 
         if response.status_code == 200:
