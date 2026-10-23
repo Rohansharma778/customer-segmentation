@@ -3,6 +3,7 @@ import requests
 import pandas as pd           
 import matplotlib.pyplot as plt 
 import seaborn as sns
+import time
 
 API_URL = "https://customer-segmentation-api-pf7n.onrender.com"
 
@@ -91,6 +92,29 @@ st.set_page_config(
     layout="centered"
 )
 
+def wait_for_backend():
+    for attempt in range(24):
+        try:
+            response = requests.get(
+                f"{API_URL}/health",
+                timeout=10
+            )
+            if response.status_code == 200:
+                return True
+        except requests.RequestException:
+            pass
+
+        time.sleep(5)
+
+    return False
+
+
+with st.spinner("Waking up the backend... Please wait."):
+    backend_ready = wait_for_backend()
+
+if not backend_ready:
+    st.error("Backend is not responding. Please refresh and try again.")
+    st.stop()
 
 st.title("Customer Segmentation")
 st.write(
