@@ -29,13 +29,8 @@ key_features = [
     "Total_interaction"
 ]
 
-4 features
-    ↓
-StandardScaler
-    ↓
-PCA → 2 components
-    ↓
-KMeans
+4 features->StandardScaler->PCA → 2 components->KMeans
+
 
 
 ```
